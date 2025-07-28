@@ -11,7 +11,7 @@ const skills = [
 
 const SkillsSection = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-r from-blue-500/10 via-slate-900/40 to-slate-800/60 dark:from-blue-400/10 dark:via-slate-900/60 dark:to-slate-950/80">
+    <section className="m-0 p-0">
       <h2 className="text-4xl font-extrabold text-center text-blue-400 dark:text-blue-500 mb-12 font-sans">Skills</h2>
       <div className="flex gap-4 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-slate-800">
         {skills.map((skill, index) => (

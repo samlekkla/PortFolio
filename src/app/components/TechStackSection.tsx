@@ -77,8 +77,11 @@ const TechStackSection = () => {
     "Self-leadership",
   ];
 
+  // Featured/favorite techs (customize as you wish)
+  const featured = ["C#", "React", "Azure", "JavaScript", "Node.js"];
+
   return (
-    <section className="relative py-20 px-4 bg-gradient-to-br from-slate-100/80 to-blue-50/60 dark:from-slate-900/80 dark:to-blue-950/60">
+    <section className="relative m-0 p-0">
       {/* Background accents */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-0 left-0 w-[400px] h-[300px] bg-gradient-to-br from-blue-400/30 via-violet-400/20 to-pink-400/10 rounded-full blur-3xl opacity-40" />
@@ -94,33 +97,64 @@ const TechStackSection = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center text-blue-500 dark:text-violet-400 mb-12 font-sans tracking-tight">
+        <div className="flex flex-col items-center mb-4">
+          <span className="text-2xl md:text-3xl mb-2">🧑‍💻</span>
+          <span className="text-lg md:text-xl font-semibold text-slate-700 dark:text-slate-200 text-center">I love building with these tools and always exploring new tech!</span>
+        </div>
+        <h2 className="text-4xl font-extrabold text-center text-blue-500 dark:text-violet-400 mb-8 font-sans tracking-tight relative inline-block w-full">
           Tech Stack
-          <span className="block w-24 mx-auto mt-2 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-pink-500 rounded-full animate-pulse" />
+          <span className="block w-24 mx-auto mt-2 h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-pink-500 rounded-full animate-gradient-flow absolute left-1/2 -translate-x-1/2" />
         </h2>
+        {/* Featured row */}
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
+          {featured.map((tech, i) => {
+            const iconData = ICON_MAP[tech];
+            return iconData ? (
+              <div
+                key={tech}
+                className="group flex flex-col items-center justify-center animate-fade-in"
+                style={{ animationDelay: `${i * 80}ms` }}
+                title={tech}
+              >
+                <div className="w-14 h-14 flex items-center justify-center rounded-xl shadow-lg bg-gradient-to-br from-blue-100 via-violet-100 to-pink-100 dark:from-blue-900/30 dark:via-violet-900/30 dark:to-pink-900/30 border-2 border-blue-400 dark:border-violet-400 group-hover:scale-110 transition-transform">
+                  {iconData.icon ? (
+                    React.createElement(iconData.icon, {
+                      style: { color: iconData.color },
+                      className: "w-8 h-8",
+                    })
+                  ) : iconData.iconifyIcon ? (
+                    <Icon icon={iconData.iconifyIcon} width="28" height="28" color={iconData.color} aria-label={tech} role="img" />
+                  ) : null}
+                </div>
+                <span className="mt-2 text-xs font-bold text-blue-500 dark:text-violet-400 animate-fade-in" style={{ animationDelay: `${i * 100 + 200}ms` }}>{tech}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
         <div className="flex flex-col gap-12">
-          {categories.map((cat) => (
+          {categories.map((cat, catIdx) => (
             <div key={cat.label}>
               <h3 className="text-2xl font-bold text-blue-400 dark:text-purple-400 mb-6 font-sans border-b border-blue-500/30 pb-2">
                 {cat.label}
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8">
-                {cat.items.map((tech) => {
+                {cat.items.map((tech, i) => {
                   const iconData = ICON_MAP[tech];
                   return iconData ? (
                     <div
                       key={tech}
-                      className="group relative flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-200"
+                      className="group relative flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-200 animate-fade-in"
+                      style={{ animationDelay: `${i * 60 + catIdx * 200}ms` }}
+                      title={tech}
                     >
                       <div className="w-14 h-14 flex items-center justify-center rounded-xl shadow-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 group-hover:border-blue-500 dark:group-hover:border-violet-400">
                         {iconData.icon ? (
                           React.createElement(iconData.icon, {
-                            title: tech,
                             style: { color: iconData.color },
                             className: "w-8 h-8",
                           })
                         ) : iconData.iconifyIcon ? (
-                          <Icon icon={iconData.iconifyIcon} width="28" height="28" color={iconData.color} />
+                          <Icon icon={iconData.iconifyIcon} width="28" height="28" color={iconData.color} aria-label={tech} role="img" />
                         ) : null}
                       </div>
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 rounded bg-slate-900 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
@@ -133,17 +167,25 @@ const TechStackSection = () => {
             </div>
           ))}
 
-          {/* Others section */}
-          <div>
+          {/* Others as Badges */}
+          <div className="mt-12">
             <h3 className="text-2xl font-bold text-blue-400 dark:text-purple-400 mb-6 font-sans border-b border-blue-500/30 pb-2">
               Others
             </h3>
-            <ul className="list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300 text-base font-medium">
+            <div className="flex flex-wrap gap-3">
               {others.map((item) => (
-                <li key={item}>{item}</li>
+                <span
+                  key={item}
+                  className="inline-block px-3 py-1 bg-gradient-to-br from-blue-100/60 to-purple-100/40 dark:from-blue-800/30 dark:to-purple-700/30 text-sm font-medium text-blue-700 dark:text-purple-200 rounded-full border border-blue-300/40 dark:border-violet-400/30 shadow-sm hover:scale-105 transition-transform"
+                >
+                  {item}
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
+        </div>
+        <div className="mt-10 text-center text-base italic text-slate-600 dark:text-slate-300">
+          <span className="text-lg mr-1">✨</span>Always learning, always building. My stack is always growing!
         </div>
       </div>
     </section>

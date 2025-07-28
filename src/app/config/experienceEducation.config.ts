@@ -2,11 +2,12 @@ export type ExperienceEducationItem = {
     title: string;
     organization: string;
     location?: string;
-    start: string;
+    start?: string;
     end?: string;
     description?: string;
-    type: "experience" | "education";
+    type: "experience" | "education" | "certificate";
     tags?: string[];
+    url?: string; // Optional URL for certificates or projects
 };
 
 const experienceEducationConfig: ExperienceEducationItem[] = [
@@ -37,7 +38,7 @@ const experienceEducationConfig: ExperienceEducationItem[] = [
         type: "experience",
         tags: ["Sales", "Customer Relations", "Order Processing", "Logistics"],
     },
-       {
+    {
         title: "Overseas IT Coordinator",
         organization: "Winnine Interactive Co., Ltd.",
         start: "2019",
@@ -54,15 +55,27 @@ const experienceEducationConfig: ExperienceEducationItem[] = [
         start: "2024",
         end: "2026",
         type: "education",
-        tags: [".NET", "Azure", "Cloud", "Backend"],
+        tags: [".NET", "Azure", "Cloud", "Backend", "MsSQL", "Entity Framework"
+            , "C#", "ASP.NET Core", "Web APIs", "Cloud Services", "Microservices", "Agile",
+            "Unit Tests", "Clean Architecture", "CI/CD", "DevOps", "Frontend"]
     },
-        {
+    {
         title: "Front End Developer",
         organization: "Sundsgården Folk High School",
         start: "JAN 2024",
         end: "JUN 2025",
         type: "education",
-        tags: ["Front End", "JavaScript", "React", "CSS"],
+        tags: ["Front End", "JavaScript", "React", "CSS", "Bootstrap", "Tailwind CSS", "HTML", "TypeScript"],
+    },
+
+    //Certificates
+    {
+        title: "Full Stack Developer C# Basics",
+        organization: "Distansakademin.se", 
+        description: "Basics of C# and .NET, including object-oriented programming, data structures, and basic web development.",
+        type: "certificate",
+        tags: ["C#", ".NET", "Object-Oriented Programming", "Web Development", "MVC", "MangoDB"],
+        url: "https://verify.trueoriginal.com/FF2B5E07-15AB-E14E-8441-1AA5F3AFAC29/?ref=direct-copy"
     },
 
 ];

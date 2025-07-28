@@ -1,5 +1,6 @@
 export type TechStackItem = {
   name: string;
+  logo?: string;
 };
 
 export type TechStackCategory = {
@@ -20,10 +21,10 @@ const techStackConfig: TechStackConfig = {
         { name: "CSS" },
         { name: "JavaScript" },
         { name: "TypeScript" },
-        { name: "Tailwind CSS" },
+        { name: "Tailwind" },
         { name: "React" },
         { name: "Next.js" },
-        { name: "Vue" },
+        { name: "Vue", logo: "/logos/vue.svg" },
         { name: "Bootstrap" },
         { name: "Angular" },
       ],
@@ -31,39 +32,39 @@ const techStackConfig: TechStackConfig = {
     {
       name: "Backend",
       items: [
-        { name: "C#" },
+        { name: "C#", logo: "/logos/c-sharp.svg" },
         { name: ".NET" },
-        { name: "Entity Framework" },
         { name: "Nest.js" },
         { name: "Node.js" },
+        { name: "Entity Framework" },
         { name: "MSSQL" },
         { name: "PostgreSQL" },
         { name: "MySQL" },
         { name: "MongoDB" },
-        { name: "Cosmos DB" },
+        { name: "CosmosDB" },
       ],
     },
     {
-      name: "Tools",
+      name: "Tools & Platforms",
       items: [
         { name: "Azure" },
-        { name: "Cloud" },
         { name: "GitHub" },
         { name: "Git" },
-        { name: "Postman" },
+        { name: "GitHub Actions" },
+        { name: "DevOps" },
+        { name: "Unit tests" },
+        { name: "VS Code" },
         { name: "Visual Studio" },
-        { name: "Visual Studio Code" },
       ],
     },
     {
       name: "Others",
       items: [
-        { name: "Unit testing" },
+        { name: "Unit tests" },
         { name: "Agile methods" },
         { name: "Cloud services" },
         { name: "Cloud databases" },
         { name: "Self-leadership" },
-        { name: "Team collaboration" },
       ],
     },
   ],
