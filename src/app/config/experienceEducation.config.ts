@@ -50,7 +50,7 @@ const experienceEducationConfig: ExperienceEducationItem[] = [
 
     // Education
     {
-        title: ".NET Developer with Azure Focus",
+        title: ".NET Developer Specialized in Azure and Cloud Solutions",
         organization: "Jensen Education College",
         start: "2024",
         end: "2026",
@@ -61,7 +61,7 @@ const experienceEducationConfig: ExperienceEducationItem[] = [
     },
     {
         title: "Front End Developer",
-        organization: "Sundsgården Folk High School",
+        organization: "Sundsgarden Folk High School",
         start: "JAN 2024",
         end: "JUN 2025",
         type: "education",
