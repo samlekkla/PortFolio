@@ -1,4 +1,5 @@
 "use client";
+import { sub } from "framer-motion/client";
 import React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -24,12 +25,17 @@ const ContactSection = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // Let browser submit to Formspree, then clear textarea
-    setTimeout(() => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await fetch("https://formspree.io/f/xkgzbgnd", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(e.currentTarget),
+    });
+    if (res.ok) {
       setForm({ name: '', email: '', message: '' });
       setSubmitted(true);
-    }, 100);
+    }
   };
 
   return (
@@ -87,48 +93,54 @@ const ContactSection = () => {
         </div>
         {/* Right: Contact Form */}
         <div className="w-full md:w-2/3 animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <form 
-            className="w-full flex flex-col gap-6"
-            action="https://formspree.io/f/xkgzbgnd"
-            method="POST"
-            target="_blank"
-            onSubmit={handleSubmit}
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-              value={form.name}
-              onChange={handleChange}
-              className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={4}
-              required
-              value={form.message}
-              onChange={handleChange}
-              className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
-            />
-            <button
-              type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold text-lg shadow-lg border-none outline-none transition-all duration-300 hover:scale-105 hover:shadow-neon focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 animate-fade-in"
-              style={{ animationDelay: '300ms' }}
-            >
-              🚀 Send Message
-            </button>
-          </form>
+          {submitted ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <h3 className="text-2xl font-bold text-blue-500 dark:text-violet-400 mb-4">Thanks! Your message was sent.</h3>
+              <button
+                className="px-6 py-2 rounded-full bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+                onClick={() => setSubmitted(false)}
+              >
+                Go back
+              </button>
+            </div>
+          ) : (
+            <form className="w-full flex flex-col gap-6" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+                value={form.name}
+                onChange={handleChange}
+                className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows={4}
+                required
+                value={form.message}
+                onChange={handleChange}
+                className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
+              />
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold text-lg shadow-lg border-none outline-none transition-all duration-300 hover:scale-105 hover:shadow-neon focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 animate-fade-in"
+                style={{ animationDelay: '300ms' }}
+              >
+                🚀 Send Message
+              </button>
+            </form>
+          )}
           <div className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400 italic">
             <span className="text-base mr-1">💡</span>Prefer email or LinkedIn? Reach out anytime!
           </div>

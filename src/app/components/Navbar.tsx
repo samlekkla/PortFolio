@@ -13,6 +13,7 @@ const navLinks = [
 const resumeLink = "/resume.pdf";
 
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
@@ -36,6 +37,19 @@ const Navbar = () => {
 	window.addEventListener("scroll", onScroll);
 	return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close menu on outside click
+  useEffect(() => {
+	if (!menuOpen) return;
+	const handleClick = (e: MouseEvent) => {
+	  const nav = document.getElementById("mobile-nav");
+	  if (nav && !nav.contains(e.target as Node)) {
+		setMenuOpen(false);
+	  }
+	};
+	document.addEventListener("mousedown", handleClick);
+	return () => document.removeEventListener("mousedown", handleClick);
+  }, [menuOpen]);
 
   return (
 	<nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 shadow-lg backdrop-blur-md border-b border-blue-400 dark:border-slate-700">
@@ -125,35 +139,28 @@ const Navbar = () => {
 		  aria-label="Toggle menu"
 		>
 		  <span
-			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 mb-1 transition-all duration-300 ${
-			  menuOpen ? "rotate-45 translate-y-2" : ""
-			}`}
+			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 mb-1 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
 		  />
 		  <span
-			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 mb-1 transition-all duration-300 ${
-			  menuOpen ? "opacity-0" : ""
-			}`}
+			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 mb-1 transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
 		  />
 		  <span
-			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 transition-all duration-300 ${
-			  menuOpen ? "-rotate-45 -translate-y-2" : ""
-			}`}
+			className={`block w-6 h-0.5 bg-white dark:bg-slate-200 transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
 		  />
 		</button>
 	  </div>
-	  {/* Mobile Slide-in Panel */}
+	  {/* Mobile Dropdown Panel */}
 	  <div
-		className={`fixed top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 backdrop-blur-xl z-40 transition-transform duration-300 ${
-		  menuOpen ? "translate-x-0" : "-translate-x-full"
-		}`}
-		style={{ pointerEvents: menuOpen ? "auto" : "none" }}
+		id="mobile-nav"
+		className={`md:hidden fixed top-16 left-0 w-full bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 shadow-xl z-40 transition-all duration-300 ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+		style={{ overflow: "hidden" }}
 	  >
-		<div className="flex flex-col items-center justify-center h-full gap-10">
+		<div className="flex flex-col items-center gap-6 py-8">
 		  {navLinks.map((link) => (
 			<Link
 			  key={link.name}
 			  href={link.href}
-			  className="text-2xl font-bold text-white dark:text-slate-200 hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors duration-200 px-4 py-2 rounded-lg"
+			  className="text-xl font-bold text-white dark:text-slate-200 hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors duration-200 px-4 py-2 rounded-lg"
 			  onClick={() => setMenuOpen(false)}
 			>
 			  {link.name}
