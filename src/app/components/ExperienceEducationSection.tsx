@@ -40,8 +40,7 @@ const ExperienceEducationSection = () => {
   const education = experienceEducationConfig.filter((item) => item.type === "education");
   const certificates = experienceEducationConfig.filter((item) => item.type === "certificate");
 
-  const getAnimationClass = (idx: number) =>
-    `opacity-0 translate-y-8 animate-fade-in-up animation-delay-${idx * 100}`;
+  // Removed unused getAnimationClass to fix lint error
 
   return (
     <section id="career" className="m-0 p-0">

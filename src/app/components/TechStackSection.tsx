@@ -1,16 +1,17 @@
 "use client";
 
 import React from "react";
+import { IconBaseProps } from "react-icons";
 import {
   SiHtml5, SiCss3, SiJavascript, SiTypescript, SiTailwindcss,
   SiReact, SiNextdotjs, SiAngular, SiBootstrap, SiDotnet,
   SiNodedotjs, SiNestjs, SiGithub, SiGit, SiPostgresql,
   SiMysql, SiMongodb, SiPostman
 } from "react-icons/si";
-import { FaCloud, FaVuejs, FaDatabase } from "react-icons/fa";
+import { FaVuejs, FaDatabase } from "react-icons/fa";
 import { Icon } from "@iconify/react";
 
-const ICON_MAP: Record<string, { icon?: React.ComponentType<any>; iconifyIcon?: string; color: string } | null> = {
+const ICON_MAP: Record<string, { icon?: React.ComponentType<IconBaseProps>; iconifyIcon?: string; color: string } | null> = {
   // Frontend
   HTML: { icon: SiHtml5, color: "#E34F26" },
   CSS: { icon: SiCss3, color: "#1572B6" },
