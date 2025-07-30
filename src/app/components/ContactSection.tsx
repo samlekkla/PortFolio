@@ -17,6 +17,21 @@ const socialLinks = [
 ];
 
 const ContactSection = () => {
+  const [form, setForm] = React.useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Let browser submit to Formspree, then clear textarea
+    setTimeout(() => {
+      setForm({ name: '', email: '', message: '' });
+      setSubmitted(true);
+    }, 100);
+  };
+
   return (
     <section id="contact" className="min-h-[60vh] flex items-center justify-center m-0 p-0">
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -77,12 +92,15 @@ const ContactSection = () => {
             action="https://formspree.io/f/xkgzbgnd"
             method="POST"
             target="_blank"
+            onSubmit={handleSubmit}
           >
             <input
               type="text"
               name="name"
               placeholder="Your Name"
               required
+              value={form.name}
+              onChange={handleChange}
               className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
             />
             <input
@@ -90,6 +108,8 @@ const ContactSection = () => {
               name="email"
               placeholder="Your Email"
               required
+              value={form.email}
+              onChange={handleChange}
               className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
             />
             <textarea
@@ -97,6 +117,8 @@ const ContactSection = () => {
               placeholder="Your Message"
               rows={4}
               required
+              value={form.message}
+              onChange={handleChange}
               className="px-5 py-3 rounded-xl bg-white/20 dark:bg-slate-800/30 text-slate-900 dark:text-slate-100 font-medium shadow focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-400 focus:ring-offset-2 border border-transparent focus:border-blue-400 dark:focus:border-purple-400 transition-all duration-200"
             />
             <button
