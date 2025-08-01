@@ -149,10 +149,10 @@ const Navbar = () => {
 		  />
 		</button>
 	  </div>
-	  {/* Mobile Dropdown Panel */}
+	  {/* Mobile Dropdown Panel (slide down) */}
 	  <div
 		id="mobile-nav"
-		className={`md:hidden fixed top-16 left-0 w-full bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 shadow-xl z-40 transition-all duration-300 ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+		className={`md:hidden fixed top-16 left-0 w-full bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 dark:from-slate-900 dark:via-slate-800 dark:to-slate-950 shadow-xl z-40 transition-all duration-300 transform ${menuOpen ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0 pointer-events-none"}`}
 		style={{ overflow: "hidden" }}
 	  >
 		<div className="flex flex-col items-center gap-6 py-8">

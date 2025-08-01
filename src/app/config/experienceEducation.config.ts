@@ -31,7 +31,7 @@ const experienceEducationConfig: ExperienceEducationItem[] = [
     },
     {
         title: "Sales Representative",
-        organization: "Insitepart AB",
+        organization: "CT Food Stockholm AB",
         start: "2022",
         end: "2023",
         description: "Handled customer relations, processed orders, and recommended products to restaurants and retailers. Maintained regular contact to boost sales and coordinated with logistics to ensure timely deliveries.",
