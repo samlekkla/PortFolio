@@ -10,7 +10,7 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-const resumeLink = "/resume.pdf";
+const resumeLink = "/Resume.pdf";
 
 
 
