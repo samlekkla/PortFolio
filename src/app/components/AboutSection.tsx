@@ -58,7 +58,7 @@ const AboutSection = () => {
               ))}
             </div>
             <a
-              href="/resume.pdf"
+              href="/Resume.pdf"
               download
               className="inline-block w-fit mt-2 px-6 py-3 rounded-xl font-bold text-base bg-gradient-to-r from-blue-500 via-violet-500 to-pink-500 text-white shadow-lg border-2 border-blue-400 dark:border-violet-400 hover:scale-105 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 transition-all duration-300"
             >
